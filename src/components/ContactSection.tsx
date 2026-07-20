@@ -3,9 +3,9 @@ import { Github, Linkedin, Mail } from "lucide-react";
 import { playSound } from "@/lib/sfx";
 
 const links = [
-  { icon: Mail, label: "Email", href: "mailto:seu@exemplo.com", value: "seu@exemplo.com" },
-  { icon: Github, label: "GitHub", href: "https://github.com/seunome", value: "github.com/seunome" },
-  { icon: Linkedin, label: "LinkedIn", href: "https://linkedin.com/in/seunome", value: "linkedin.com/in/seunome" },
+  { icon: Mail, label: "Email", href: "diegosamim02@gmail.com", value: "diegosamim02@gmail.com" },
+  { icon: Github, label: "GitHub", href: "https://github.com/DiegoSamim", value: "github.com/DiegoSamim" },
+  { icon: Linkedin, label: "LinkedIn", href: "https://www.linkedin.com/in/diego-samim-da-silva-460061253/", value: "linkedin.com/in/DiegoSamim" },
 ];
 
 const ContactSection = () => {
@@ -48,15 +48,6 @@ const ContactSection = () => {
           ))}
         </div>
 
-          <motion.p
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.4 }}
-          className="mt-16 text-muted-foreground/50 text-sm font-mono"
-        >
-          © 2026 Seu Nome. Todos os direitos reservados.
-        </motion.p>
       </div>
     </section>
   );

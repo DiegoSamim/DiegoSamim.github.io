@@ -451,46 +451,46 @@ const TrophyRoom = () => {
                 </div>
 
                 <div className="space-y-4">
-                <div>
-                  <h4 className="text-foreground/85 font-mono text-sm mb-1">Objective</h4>
-                  <p className="text-muted-foreground text-sm">{selected.objective}</p>
-                </div>
-                <div>
-                  <h4 className="text-foreground/85 font-mono text-sm mb-1">Description</h4>
-                  <p className="text-muted-foreground text-sm">{selected.description}</p>
-                </div>
-                <div>
-                  <h4 className="text-foreground/85 font-mono text-sm mb-2">Tech Stack</h4>
-                  <div className="flex flex-wrap gap-2">
-                    {selected.techStack.map((tech) => (
-                      <span key={tech} className="px-3 py-1 text-xs font-mono rounded-full bg-secondary/85 text-foreground/85 border border-border/70">
-                        {tech}
-                      </span>
-                    ))}
+                  <div>
+                    <h4 className="text-foreground/85 font-mono text-sm mb-1">Objetivo</h4>
+                    <p className="text-muted-foreground text-sm">{selected.objective}</p>
                   </div>
-                </div>
-                <div className="flex gap-3 pt-2">
-                  <Button variant="hero" size="sm" asChild>
-                    <a
-                      href={selected.github}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      onMouseEnter={() => playSound("buttonHover", { volume: 0.2, debounceMs: 90 })}
-                    >
-                      <Github className="mr-2 h-4 w-4" /> GitHub
-                    </a>
-                  </Button>
-                  <Button variant="heroOutline" size="sm" asChild>
-                    <a
-                      href={selected.demo}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      onMouseEnter={() => playSound("buttonHover", { volume: 0.2, debounceMs: 90 })}
-                    >
-                      <ExternalLink className="mr-2 h-4 w-4" /> Live Demo
-                    </a>
-                  </Button>
-                </div>
+                  <div>
+                    <h4 className="text-foreground/85 font-mono text-sm mb-1">Descrição</h4>
+                    <p className="text-muted-foreground text-sm">{selected.description}</p>
+                  </div>
+                  <div>
+                    <h4 className="text-foreground/85 font-mono text-sm mb-2">Tech Stack</h4>
+                    <div className="flex flex-wrap gap-2">
+                      {selected.techStack.map((tech) => (
+                        <span key={tech} className="px-3 py-1 text-xs font-mono rounded-full bg-secondary/85 text-foreground/85 border border-border/70">
+                          {tech}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                  <div className="flex gap-3 pt-2">
+                    <Button variant="hero" size="sm" asChild>
+                      <a
+                        href={selected.github}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        onMouseEnter={() => playSound("buttonHover", { volume: 0.2, debounceMs: 90 })}
+                      >
+                        <Github className="mr-2 h-4 w-4" /> GitHub
+                      </a>
+                    </Button>
+                    <Button variant="heroOutline" size="sm" asChild>
+                      <a
+                        href={selected.demo}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        onMouseEnter={() => playSound("buttonHover", { volume: 0.2, debounceMs: 90 })}
+                      >
+                        <ExternalLink className="mr-2 h-4 w-4" /> Live Demo
+                      </a>
+                    </Button>
+                  </div>
                 </div>
               </div>
             </motion.div>

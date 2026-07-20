@@ -15,13 +15,13 @@ export interface HeroContent {
 
 export const heroContent: HeroContent = {
   greeting: "> olá_mundo",
-  firstName: "Seu",
-  lastName: "Nome",
-  role: "Desenvolvedor Full-Stack e entusiasta de código aberto",
+  firstName: "Diego",
+  lastName: "Samim",
+  role: "Engenheiro de Computação e Informação UFRJ - Desenvolvedor Full Stack",
   photo: devPhoto,
   photoAlt: "Desenvolvedor",
   links: {
-    github: "https://github.com",
-    linkedin: "https://linkedin.com",
+    github: "https://github.com/DiegoSamim",
+    linkedin: "https://www.linkedin.com/in/diego-samim-da-silva-460061253/",
   },
 };
