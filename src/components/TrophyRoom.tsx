@@ -48,8 +48,8 @@ const DeviceFrame = ({
         <span className="w-2 h-2 rounded-full bg-zinc-500" />
         <span className="w-2 h-2 rounded-full bg-zinc-500" />
       </div>
-      <div className="w-full h-[300px] rounded-xl overflow-hidden bg-black">
-        <img src={src} alt={alt} className="w-full h-full object-cover" onError={onError} />
+      <div className="w-full aspect-[2.14/1] rounded-xl overflow-hidden bg-black">
+        <img src={src} alt={alt} className="w-full h-full object-contain" onError={onError} />
       </div>
     </div>
   );
@@ -146,7 +146,7 @@ const Podium = ({
           />
         ) : (
           <span className={`${isCenter ? "text-6xl sm:text-7xl" : "text-4xl sm:text-5xl"} select-none block`}>
-            {DEFAULT_PROJECT_ICON}
+            {project.emoji || DEFAULT_PROJECT_ICON}
           </span>
         )}
       </motion.div>
@@ -445,7 +445,12 @@ const TrophyRoom = () => {
                       )}
                     </div>
                   ) : (
-                    <span className="text-5xl">{DEFAULT_PROJECT_ICON}</span>
+                    <span className="text-5xl">{selected.emoji || DEFAULT_PROJECT_ICON}</span>
+                  )}
+                  {currentMedia?.caption && (
+                    <p className="mx-auto mt-3 max-w-xl text-sm leading-relaxed text-muted-foreground">
+                      {currentMedia.caption}
+                    </p>
                   )}
                   <h3 className="text-2xl font-bold mt-3">{selected.name}</h3>
                 </div>

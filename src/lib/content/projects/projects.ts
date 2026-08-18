@@ -18,6 +18,12 @@ import SaciImageNordeste from "@/assets/saci/SaciImageNordeste.png";
 import SaciImageBestiario from "@/assets/saci/SaciImageBestiario.png";
 import SaciImageGameOver from "@/assets/saci/SaciImageGameOver.png";
 import SaciLogo from "@/assets/saci/SaciLogo.png";
+import LogiaLogo from "@/assets/logia/LogiaLogo.png";
+import LogiaHome from "@/assets/logia/LogiaHome.png";
+import LogiaDashboard from "@/assets/logia/LogiaDashboard.png";
+import LogiaConsulta from "@/assets/logia/LogiaConsulta.png";
+import LogiaTarefas from "@/assets/logia/LogiaTarefas.gif";
+import LogiaDatabase from "@/assets/logia/LogiaDatabase.gif";
 
 export type ProjectDeviceType = "pc" | "mobile";
 
@@ -25,6 +31,7 @@ export interface ProjectMedia {
   src: string;
   device: ProjectDeviceType;
   alt?: string;
+  caption?: string;
 }
 
 export interface ProjectContent {
@@ -118,5 +125,59 @@ export const projectsContent: ProjectContent[] = [
       { src: SaciImageBestiario, device: "mobile", alt: "SACI - Bestiário" },
       { src: SaciImageGameOver, device: "mobile", alt: "SACI - Game Over" },
     ]
+  },
+  {
+    id: 4,
+    name: "LogIA",
+    emoji: "🧠",
+    mainStack: "React 19 + FastAPI + PostgreSQL/pgvector",
+    oneLiner:
+      "Plataforma de memória técnica que transforma projetos, tarefas e conversas em contexto consultável para times de desenvolvimento.",
+    description:
+      "LogIA centraliza o conhecimento que normalmente fica disperso entre conversas, tarefas e documentação. A plataforma oferece autenticação com tokens e OAuth, gestão colaborativa de projetos, perfis técnicos editáveis, tarefas com histórico incremental, checklists e anexos. O chat orienta o registro do trabalho e a consulta do histórico; cada atualização alimenta uma base de conhecimento vetorial no PostgreSQL com pgvector, usada por um pipeline RAG para respostas estruturadas. O produto também inclui o Atlas, que cataloga telas, fluxos, estados, requisições e conexões de navegação, além de um catálogo visual de banco de dados com importação de DDL. Por meio de tokens pessoais e MCP, agentes como Codex e Claude Code podem consultar e registrar contexto do projeto com segurança.",
+    techStack: [
+      "React 19 + TypeScript",
+      "FastAPI + SQLAlchemy",
+      "PostgreSQL + pgvector",
+      "RAG com Gemini e Ollama",
+      "Docker + Render",
+      "MCP",
+    ],
+    objective:
+      "Preservar o contexto técnico do time de forma estruturada e pesquisável, reduzindo a dependência de memória individual e facilitando o acompanhamento, a documentação e o uso de agentes de IA no desenvolvimento.",
+    github: "https://github.com/DiegoSamim/LogIA",
+    logo: LogiaLogo,
+    media: [
+      {
+        src: LogiaHome,
+        device: "pc",
+        alt: "LogIA - Página inicial",
+        caption: "Página inicial que apresenta o diário técnico e a consulta semântica do produto.",
+      },
+      {
+        src: LogiaDashboard,
+        device: "pc",
+        alt: "LogIA - Dashboard do projeto",
+        caption: "Dashboard com progresso das tarefas, atividade recente e tecnologias do projeto.",
+      },
+      {
+        src: LogiaConsulta,
+        device: "pc",
+        alt: "LogIA - Consulta de tarefas",
+        caption: "Consulta estruturada que recupera o contexto e as tarefas em aberto do projeto.",
+      },
+      {
+        src: LogiaTarefas,
+        device: "pc",
+        alt: "LogIA - Gestão de tarefas",
+        caption: "Timeline de tarefas com status, registros incrementais e filtros de acompanhamento.",
+      },
+      {
+        src: LogiaDatabase,
+        device: "pc",
+        alt: "LogIA - Catálogo de banco de dados",
+        caption: "Catálogo visual de tabelas, domínios e relações do banco de dados do projeto.",
+      },
+    ],
   }
 ];
