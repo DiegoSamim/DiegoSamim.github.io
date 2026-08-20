@@ -6,11 +6,14 @@ import { playSound } from "@/lib/sfx";
 
 const HeroSection = () => {
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden px-4">
+    <section
+      id="home"
+      className="relative min-h-screen flex items-center justify-center overflow-hidden px-4 py-24"
+    >
       {/* Background grid */}
       <div className="absolute inset-0 bg-[linear-gradient(hsl(var(--border)/0.2)_1px,transparent_1px),linear-gradient(90deg,hsl(var(--border)/0.2)_1px,transparent_1px)] bg-[size:60px_60px] [mask-image:radial-gradient(ellipse_80%_50%_at_50%_50%,black_40%,transparent_100%)]" />
 
-      <div className="relative z-10 container mx-auto flex flex-col lg:flex-row items-center gap-12 lg:gap-20">
+      <div className="relative z-10 container mx-auto max-w-content flex flex-col lg:flex-row items-center gap-12 lg:gap-20">
         {/* Photo */}
         <motion.div
           initial={{ opacity: 0, scale: 0.8 }}
@@ -18,7 +21,7 @@ const HeroSection = () => {
           transition={{ duration: 0.8, ease: "easeOut" }}
           className="relative"
         >
-          <div className="w-56 h-56 lg:w-72 lg:h-72 rounded-full overflow-hidden border-2 border-border/80 glow-primary">
+          <div className="w-56 h-56 lg:w-72 lg:h-72 rounded-full overflow-hidden border-2 border-strong glow-primary">
             <img src={heroContent.photo} alt={heroContent.photoAlt} className="w-full h-full object-cover" />
           </div>
           <div className="absolute -inset-2 rounded-full bg-white/5 blur-2xl -z-10" />
@@ -30,7 +33,7 @@ const HeroSection = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
-            className="text-muted-foreground font-mono text-sm mb-3 tracking-wider"
+            className="text-subtle font-mono text-sm mb-3 tracking-wider"
           >
             {heroContent.greeting}
           </motion.p>
@@ -38,7 +41,7 @@ const HeroSection = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3 }}
-            className="text-5xl lg:text-7xl font-bold mb-4 text-glow-primary"
+            className="text-display font-bold mb-4 text-glow-primary"
           >
             <span className="text-foreground">{heroContent.firstName} </span>
             <span className="text-foreground/85">{heroContent.lastName}</span>
@@ -85,6 +88,26 @@ const HeroSection = () => {
           </motion.div>
         </div>
       </div>
+
+      {/* B3: o hero ocupava a tela inteira sem nada indicando que há mais
+          página abaixo. Um fio que desce devagar, sem seta piscante. */}
+      <motion.a
+        href="#about"
+        aria-label="Ir para a próxima seção"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 1.1, duration: 0.8 }}
+        className="absolute bottom-10 left-1/2 z-10 hidden -translate-x-1/2 flex-col items-center gap-3 sm:flex"
+      >
+        <span className="font-mono text-label uppercase text-faint">sobre</span>
+        <span className="relative block h-10 w-px overflow-hidden bg-border">
+          <motion.span
+            className="absolute inset-x-0 top-0 block h-4 bg-foreground/70"
+            animate={{ y: ["-100%", "260%"] }}
+            transition={{ duration: 2.4, repeat: Infinity, ease: "easeInOut" }}
+          />
+        </span>
+      </motion.a>
     </section>
   );
 };

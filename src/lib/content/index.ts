@@ -3,3 +3,5 @@ export { aboutContent, AboutCardIcon, AboutCardType } from "./about/about";
 export { projectsContent } from "./projects/projects";
 export type { ProjectContent, ProjectMedia, ProjectDeviceType, ProjectPresentation } from "./projects/projects";
 export { skillsContent } from "./skills/skills";
+export { contactContent, ContactLinkIcon } from "./contact/contact";
+export type { ContactContent, ContactLink } from "./contact/contact";

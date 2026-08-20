@@ -80,7 +80,7 @@ const PresentationTheater = ({
             }}
             onMouseEnter={() => playSound("buttonHover", { volume: 0.2, debounceMs: 90 })}
             aria-label="Fechar apresentação"
-            className="absolute right-4 top-4 z-10 flex h-10 w-10 items-center justify-center rounded-full border border-border/60 bg-background/70 text-muted-foreground backdrop-blur-md transition-colors hover:border-[hsl(var(--glow-gold)/0.5)] hover:text-foreground sm:right-8 sm:top-8"
+            className="absolute right-4 top-4 z-10 flex h-10 w-10 items-center justify-center rounded-full border border-border bg-background/70 text-muted-foreground backdrop-blur-md transition-colors hover:border-[hsl(var(--glow-gold)/0.5)] hover:text-foreground sm:right-8 sm:top-8"
           >
             <X className="h-5 w-5" />
           </motion.button>

@@ -4,6 +4,8 @@ import { ChevronLeft, ChevronRight, ExternalLink, Github, X } from "lucide-react
 import { Button } from "@/components/ui/button";
 import { projectsContent } from "@/lib/content";
 import type { ProjectPresentation } from "@/lib/content";
+import Section from "@/components/Section";
+import SectionHeading from "@/components/SectionHeading";
 import PresentationCue from "@/components/PresentationCue";
 import PresentationTheater from "@/components/PresentationTheater";
 import { playSound } from "@/lib/sfx";
@@ -35,9 +37,9 @@ const DeviceFrame = ({
 }) => {
   if (device === "mobile") {
     return (
-      <div className="mx-auto w-[250px] h-[460px] rounded-[2.2rem] p-3 bg-zinc-800 border border-zinc-500/40 shadow-[0_20px_40px_rgba(0,0,0,0.55)] relative">
-        <div className="absolute top-2 left-1/2 -translate-x-1/2 w-24 h-4 rounded-b-xl bg-zinc-900" />
-        <div className="w-full h-full rounded-[1.6rem] overflow-hidden bg-black">
+      <div className="mx-auto w-[250px] h-[460px] rounded-[2.2rem] p-3 bg-secondary border border-strong shadow-[0_20px_40px_hsl(225_20%_3%/0.6)] relative">
+        <div className="absolute top-2 left-1/2 -translate-x-1/2 w-24 h-4 rounded-b-xl bg-background" />
+        <div className="w-full h-full rounded-[1.6rem] overflow-hidden bg-background">
           <img src={src} alt={alt} className="w-full h-full object-cover" onError={onError} />
         </div>
       </div>
@@ -45,11 +47,11 @@ const DeviceFrame = ({
   }
 
   return (
-    <div className="w-full rounded-2xl p-3 bg-zinc-800 border border-zinc-500/40 shadow-[0_20px_40px_rgba(0,0,0,0.55)]">
+    <div className="w-full rounded-2xl p-3 bg-secondary border border-strong shadow-[0_20px_40px_hsl(225_20%_3%/0.6)]">
       <div className="h-4 flex items-center gap-1.5 px-2">
-        <span className="w-2 h-2 rounded-full bg-zinc-500" />
-        <span className="w-2 h-2 rounded-full bg-zinc-500" />
-        <span className="w-2 h-2 rounded-full bg-zinc-500" />
+        <span className="w-2 h-2 rounded-full bg-faint" />
+        <span className="w-2 h-2 rounded-full bg-faint" />
+        <span className="w-2 h-2 rounded-full bg-faint" />
       </div>
       <div className="w-full aspect-[2.14/1] rounded-xl overflow-hidden bg-black">
         <img src={src} alt={alt} className="w-full h-full object-contain" onError={onError} />
@@ -323,29 +325,22 @@ const TrophyRoom = () => {
   }, []);
 
   return (
-    <section className="py-24 px-4 overflow-hidden" id="trophies">
-      <div className="container mx-auto max-w-5xl">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="text-center mb-16"
-        >
-          <h2 className="text-3xl lg:text-4xl font-bold mb-4">
-            <span className="text-muted-foreground font-mono text-lg block mb-2">{'// projetos'}</span>
-            Tour pelos Projetos
-          </h2>
-          <p className="text-muted-foreground">Explore projetos selecionados com descrições e imagens.</p>
-        </motion.div>
+    <Section id="trophies" className="overflow-hidden">
+      <SectionHeading
+        eyebrow="// projetos"
+        title="Tour pelos Projetos"
+        subtitle="Explore projetos selecionados com descrições e imagens."
+        className="mb-16"
+      />
 
-        {/* Carousel */}
+      {/* Carousel */}
         <div className="relative flex items-end justify-center gap-4 sm:gap-8 min-h-[380px] pt-16">
           {/* Nav arrows */}
           <Button
             variant="ghost"
             size="icon"
             onClick={goLeft}
-            className="absolute left-0 sm:left-4 top-1/2 -translate-y-1/2 z-20 bg-secondary/80 backdrop-blur-sm hover:bg-secondary hover:text-foreground border border-border/50"
+            className="absolute left-0 sm:left-4 top-1/2 -translate-y-1/2 z-20 bg-secondary backdrop-blur-sm hover:bg-secondary hover:text-foreground border border-border"
           >
             <ChevronLeft className="h-5 w-5" />
           </Button>
@@ -353,7 +348,7 @@ const TrophyRoom = () => {
             variant="ghost"
             size="icon"
             onClick={goRight}
-            className="absolute right-0 sm:right-4 top-1/2 -translate-y-1/2 z-20 bg-secondary/80 backdrop-blur-sm hover:bg-secondary hover:text-foreground border border-border/50"
+            className="absolute right-0 sm:right-4 top-1/2 -translate-y-1/2 z-20 bg-secondary backdrop-blur-sm hover:bg-secondary hover:text-foreground border border-border"
           >
             <ChevronRight className="h-5 w-5" />
           </Button>
@@ -403,7 +398,6 @@ const TrophyRoom = () => {
                 }`}
             />
           ))}
-        </div>
       </div>
 
       {/* Modal */}
@@ -451,7 +445,7 @@ const TrophyRoom = () => {
                             type="button"
                             variant="ghost"
                             size="icon"
-                            className="absolute left-2 top-1/2 -translate-y-1/2 bg-background/70 border border-border/60"
+                            className="absolute left-2 top-1/2 -translate-y-1/2 bg-background/70 border border-border"
                             onClick={() => {
                               playSound("clickSwitch", { volume: 0.28, debounceMs: 70 });
                               setSelectedMediaIndex((prev) => (prev - 1 + selectedMedia.length) % selectedMedia.length);
@@ -463,7 +457,7 @@ const TrophyRoom = () => {
                             type="button"
                             variant="ghost"
                             size="icon"
-                            className="absolute right-2 top-1/2 -translate-y-1/2 bg-background/70 border border-border/60"
+                            className="absolute right-2 top-1/2 -translate-y-1/2 bg-background/70 border border-border"
                             onClick={() => {
                               playSound("clickSwitch", { volume: 0.28, debounceMs: 70 });
                               setSelectedMediaIndex((prev) => (prev + 1) % selectedMedia.length);
@@ -498,7 +492,7 @@ const TrophyRoom = () => {
                     <h4 className="text-foreground/85 font-mono text-sm mb-2">Tech Stack</h4>
                     <div className="flex flex-wrap gap-2">
                       {selected.techStack.map((tech) => (
-                        <span key={tech} className="px-3 py-1 text-xs font-mono rounded-full bg-secondary/85 text-foreground/85 border border-border/70">
+                        <span key={tech} className="px-3 py-1 text-xs font-mono rounded-full bg-secondary text-foreground border border-border">
                           {tech}
                         </span>
                       ))}
@@ -541,7 +535,7 @@ const TrophyRoom = () => {
       </AnimatePresence>
 
       <PresentationTheater presentation={presentation} onClose={() => setPresentation(null)} />
-    </section>
+    </Section>
   );
 };
 

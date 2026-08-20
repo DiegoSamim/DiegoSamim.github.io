@@ -13,6 +13,15 @@ export default {
       },
     },
     extend: {
+      fontSize: {
+        display: ["clamp(2.75rem, 7vw, 4.5rem)", { lineHeight: "0.98", letterSpacing: "-0.035em" }],
+        h2: ["clamp(1.75rem, 3.4vw, 2.25rem)", { lineHeight: "1.1", letterSpacing: "-0.025em" }],
+        h3: ["1.0625rem", { lineHeight: "1.25", letterSpacing: "-0.012em" }],
+        lead: ["1.0625rem", { lineHeight: "1.65" }],
+        body: ["0.9375rem", { lineHeight: "1.6" }],
+        caption: ["0.84375rem", { lineHeight: "1.55" }],
+        label: ["0.71875rem", { lineHeight: "1.2", letterSpacing: "0.24em" }],
+      },
       fontFamily: {
         heading: ['"Space Grotesk"', 'system-ui', 'sans-serif'],
         body: ['"Space Grotesk"', 'system-ui', 'sans-serif'],
@@ -20,6 +29,8 @@ export default {
       },
       colors: {
         border: "hsl(var(--border))",
+        subtle: "hsl(var(--text-subtle))",
+        faint: "hsl(var(--text-faint))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
         background: "hsl(var(--background))",
@@ -62,6 +73,12 @@ export default {
           border: "hsl(var(--sidebar-border))",
           ring: "hsl(var(--sidebar-ring))",
         },
+      },
+      borderColor: {
+        strong: "hsl(var(--border-strong))",
+      },
+      maxWidth: {
+        content: "72rem",
       },
       borderRadius: {
         lg: "var(--radius)",

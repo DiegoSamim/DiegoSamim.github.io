@@ -2,52 +2,62 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
-
 @layer base {
   :root {
-    --background: 0 0% 7%;
-    --foreground: 220 8% 92%;
+    /* ── A1: matiz única (225°) em toda a escala. O canvas do body já vivia
+       nessa família; os tokens neutros puros (0 0% x%) foram migrados. ── */
+    --background: 225 9% 8%;
+    --foreground: 225 8% 93%;
 
-    --card: 0 0% 10%;
-    --card-foreground: 220 8% 92%;
+    /* ── A2: escala de elevação. card < secondary < accent, todas ACIMA do
+       canvas, para que superfície leia como superfície sem depender de cor. ── */
+    --card: 225 9% 16%;
+    --card-foreground: 225 8% 93%;
 
-    --popover: 0 0% 10%;
-    --popover-foreground: 220 8% 92%;
+    --popover: 225 9% 15%;
+    --popover-foreground: 225 8% 93%;
 
-    --primary: 270 28% 74%;
-    --primary-foreground: 0 0% 8%;
+    --primary: 225 10% 86%;
+    --primary-foreground: 225 9% 10%;
 
-    --secondary: 0 0% 14%;
-    --secondary-foreground: 220 8% 86%;
+    --secondary: 225 9% 20%;
+    --secondary-foreground: 225 8% 90%;
 
-    --muted: 0 0% 12%;
-    --muted-foreground: 220 6% 63%;
+    --muted: 225 9% 14%;
+    --muted-foreground: 225 7% 73%;
 
-    --accent: 0 0% 16%;
-    --accent-foreground: 220 8% 92%;
+    --accent: 225 9% 24%;
+    --accent-foreground: 225 8% 93%;
 
     --destructive: 0 84% 60%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: 0 0% 20%;
-    --input: 0 0% 18%;
-    --ring: 270 28% 74%;
+    --border: 225 9% 26%;
+    --border-strong: 225 9% 34%;
+    --input: 225 9% 24%;
+    --ring: 225 12% 88%;
 
     --radius: 0.75rem;
 
-    --glow-primary: 270 35% 66%;
-    --glow-accent: 260 26% 58%;
+    /* ── D1: degraus de texto nomeados. Usar estes em opacidade cheia,
+       nunca token esmaecido + /opacity por cima. ── */
+    --text-subtle: 225 7% 62%;
+    --text-faint: 225 7% 50%;
+
+    /* ── A3: brilhos neutralizados. O dourado permanece porque carrega
+       informação (marca "este projeto tem vídeo"), não decoração. ── */
+    --glow-primary: 225 12% 88%;
+    --glow-accent: 225 10% 78%;
     --glow-gold: 42 26% 60%;
 
-    --sidebar-background: 0 0% 9%;
-    --sidebar-foreground: 220 8% 92%;
-    --sidebar-primary: 270 28% 74%;
-    --sidebar-primary-foreground: 0 0% 8%;
-    --sidebar-accent: 0 0% 14%;
-    --sidebar-accent-foreground: 220 8% 92%;
-    --sidebar-border: 0 0% 18%;
-    --sidebar-ring: 270 28% 74%;
+    --sidebar-background: 225 9% 10%;
+    --sidebar-foreground: 225 8% 93%;
+    --sidebar-primary: 225 10% 86%;
+    --sidebar-primary-foreground: 225 9% 10%;
+    --sidebar-accent: 225 9% 20%;
+    --sidebar-accent-foreground: 225 8% 93%;
+    --sidebar-border: 225 9% 26%;
+    --sidebar-ring: 225 12% 88%;
   }
 }
 
@@ -60,31 +70,62 @@
     @apply text-foreground font-body antialiased;
     background:
       radial-gradient(ellipse 56% 45% at 50% 68%, rgba(0, 0, 0, 0.32) 0%, transparent 70%),
-      linear-gradient(165deg, #202127 0%, #1a1c22 50%, #14161d 100%);
+      linear-gradient(165deg, hsl(225 10% 14%) 0%, hsl(225 10% 12%) 50%, hsl(226 18% 10%) 100%);
+    background-attachment: fixed;
   }
 
   h1, h2, h3, h4, h5, h6 {
     @apply font-heading;
   }
+
+  /* ── F4: foco visível em qualquer coisa focável, usando o brilho neutro ── */
+  :focus-visible {
+    outline: 2px solid hsl(var(--ring) / 0.9);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
 }
 
 @layer utilities {
   .glow-primary {
-    box-shadow: 0 0 14px hsl(var(--glow-primary) / 0.18), 0 0 36px hsl(var(--glow-primary) / 0.07);
+    box-shadow: 0 0 14px hsl(var(--glow-primary) / 0.16), 0 0 36px hsl(var(--glow-primary) / 0.07);
   }
   .glow-accent {
-    box-shadow: 0 0 14px hsl(var(--glow-accent) / 0.18), 0 0 36px hsl(var(--glow-accent) / 0.07);
+    box-shadow: 0 0 14px hsl(var(--glow-accent) / 0.16), 0 0 36px hsl(var(--glow-accent) / 0.07);
   }
   .glow-gold {
     box-shadow: 0 0 14px hsl(var(--glow-gold) / 0.24), 0 0 36px hsl(var(--glow-gold) / 0.1);
   }
   .text-glow-primary {
-    text-shadow: 0 0 10px hsl(var(--glow-primary) / 0.32);
+    text-shadow: 0 0 12px hsl(var(--glow-primary) / 0.22);
   }
   .text-glow-accent {
-    text-shadow: 0 0 10px hsl(var(--glow-accent) / 0.32);
+    text-shadow: 0 0 10px hsl(var(--glow-accent) / 0.28);
   }
+
+  /* ── A2: superfície opaca com realce superior (luz vinda de cima) e sombra
+     projetada. Substitui o antigo .glass, cujo backdrop-blur não tinha nada
+     para desfocar sobre um fundo opaco. ── */
+  .surface {
+    @apply bg-card border border-border;
+    box-shadow:
+      inset 0 1px 0 hsl(0 0% 100% / 0.07),
+      0 1px 2px hsl(225 20% 3% / 0.4),
+      0 14px 34px -18px hsl(225 20% 3% / 0.85);
+  }
+  .surface-raised {
+    @apply bg-secondary border border-border;
+    box-shadow:
+      inset 0 1px 0 hsl(0 0% 100% / 0.08),
+      0 1px 2px hsl(225 20% 3% / 0.4),
+      0 18px 44px -20px hsl(225 20% 3% / 0.9);
+  }
+  /* Mantido como alias para superfícies sobrepostas a conteúdo (modais), onde
+     o desfoque de fundo tem, aí sim, o que desfocar. */
   .glass {
-    @apply bg-card/75 backdrop-blur-xl border border-border/70;
+    @apply bg-card/90 backdrop-blur-xl border border-border;
+    box-shadow:
+      inset 0 1px 0 hsl(0 0% 100% / 0.07),
+      0 20px 60px -24px hsl(225 20% 3% / 0.9);
   }
 }

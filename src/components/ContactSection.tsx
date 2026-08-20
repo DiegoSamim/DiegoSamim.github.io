@@ -1,55 +1,52 @@
 import { motion } from "framer-motion";
-import { Github, Linkedin, Mail } from "lucide-react";
+import { Github, Linkedin, Mail, type LucideIcon } from "lucide-react";
+import Section from "@/components/Section";
+import SectionHeading from "@/components/SectionHeading";
+import { contactContent, ContactLinkIcon } from "@/lib/content";
 import { playSound } from "@/lib/sfx";
 
-const links = [
-  { icon: Mail, label: "Email", href: "diegosamim02@gmail.com", value: "diegosamim02@gmail.com" },
-  { icon: Github, label: "GitHub", href: "https://github.com/DiegoSamim", value: "github.com/DiegoSamim" },
-  { icon: Linkedin, label: "LinkedIn", href: "https://www.linkedin.com/in/diego-samim-da-silva-460061253/", value: "linkedin.com/in/DiegoSamim" },
-];
+const iconMap: Record<ContactLinkIcon, LucideIcon> = {
+  [ContactLinkIcon.EMAIL]: Mail,
+  [ContactLinkIcon.GITHUB]: Github,
+  [ContactLinkIcon.LINKEDIN]: Linkedin,
+};
 
 const ContactSection = () => {
   return (
-    <section className="py-24 px-4" id="contact">
-      <div className="container mx-auto max-w-2xl text-center">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-        >
-          <h2 className="text-3xl lg:text-4xl font-bold mb-4">
-            <span className="text-muted-foreground font-mono text-lg block mb-2">{'// contato'}</span>
-            Vamos conversar
-          </h2>
-          <p className="text-muted-foreground mb-12">Aberto a oportunidades e colaborações.</p>
-        </motion.div>
+    <Section id="contact">
+      <SectionHeading
+        eyebrow={contactContent.tag}
+        title={contactContent.title}
+        subtitle={contactContent.description}
+      />
 
-        <div className="flex flex-col sm:flex-row gap-4 justify-center">
-          {links.map((link, i) => (
+      <div className="mt-12 flex flex-col sm:flex-row gap-4 justify-center">
+        {contactContent.links.map((link, i) => {
+          const Icon = iconMap[link.icon];
+
+          return (
             <motion.a
               key={link.label}
               href={link.href}
-              target="_blank"
-              rel="noopener noreferrer"
+              {...(link.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
               onMouseEnter={() => playSound("buttonHover", { volume: 0.2, debounceMs: 90 })}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.1 }}
-              whileHover={{ scale: 1.05 }}
-              className="glass rounded-xl px-6 py-4 flex items-center gap-3 hover:border-border transition-all duration-300"
+              whileHover={{ y: -3 }}
+              className="surface rounded-xl px-6 py-4 flex items-center gap-3 hover:border-strong transition-colors duration-300"
             >
-              <link.icon className="w-5 h-5 text-foreground/80" />
+              <Icon className="w-5 h-5 text-subtle" />
               <div className="text-left">
-                <p className="text-xs text-muted-foreground font-mono">{link.label}</p>
-                <p className="text-sm text-foreground">{link.value}</p>
+                <p className="text-xs text-subtle font-mono">{link.label}</p>
+                <p className="text-caption text-foreground">{link.value}</p>
               </div>
             </motion.a>
-          ))}
-        </div>
-
+          );
+        })}
       </div>
-    </section>
+    </Section>
   );
 };
 

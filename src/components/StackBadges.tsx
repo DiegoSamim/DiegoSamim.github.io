@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import Section from "@/components/Section";
+import SectionHeading from "@/components/SectionHeading";
 import { skillsContent } from "@/lib/content";
 import { playSound } from "@/lib/sfx";
 
@@ -8,6 +10,26 @@ const allBadges = skillsContent;
 const W = 420;
 const H = 340;
 const SKILLS_PER_PAGE = 12;
+
+/**
+ * Espaço extra que a seção reserva enquanto o estojo está aberto.
+ *
+ * A tampa é `position: absolute` sobre o corpo, então ela não ocupa altura de
+ * layout nenhuma — gira para fora da caixa e era cortada pelo `overflow` da
+ * seção. Girando -122° em torno de `bottom center`, a borda distante da tampa
+ * cai ~180px abaixo da dobradiça e avança ~288px em direção ao observador; com
+ * `perspective: 1000px` isso é ampliado por ~1.47×, projetando cerca de 262px
+ * abaixo do corpo. 320 dá a folga para a espessura da tampa e a sombra de
+ * contato (`bottom: -26`).
+ *
+ * Fica na casca — não no cenário — porque animar a altura do cenário moveria o
+ * `transform-origin` dele e o estojo inteiro derivaria durante a animação.
+ */
+const LID_OPEN_HEADROOM = 320;
+
+/** Mesma curva da tampa, para a altura abrir junto com ela. */
+const LID_EASE_OPEN = [0.19, 1, 0.22, 1] as const;
+const LID_EASE_CLOSE = [0.32, 0.72, 0, 1] as const;
 
 /* ─── shared depth tokens ─── */
 const CASE_BG = "linear-gradient(180deg, #181818 0%, #111111 58%, #0b0b0b 100%)";
@@ -45,47 +67,26 @@ export default function StackBadges() {
   }, [page]);
 
   return (
-    <motion.section
-      animate={{ minHeight: isOpen ? "150vh" : "120vh" }}
-      transition={{ type: "spring", stiffness: 60, damping: 18 }}
-      style={{
-        display: "flex", flexDirection: "column",
-        alignItems: "center", justifyContent: "flex-start",
-        padding: "24px 20px 60px",
-        fontFamily: "'DM Mono', 'Fira Code', monospace",
-        overflow: "hidden",
-      }}>
+    /* B1: a seção reservava 120vh (150vh aberta) para ~540px de conteúdo, e com
+       justifyContent:flex-start todo o excedente ficava pendurado embaixo. Agora
+       a altura vem do conteúdo, no mesmo ritmo das outras seções.
+       A5: a fontFamily pedia 'DM Mono'/'Fira Code', que nunca foram carregadas —
+       a seção inteira caía para o monospace do sistema. */
+    <Section
+      id="skills"
+      tone="raised"
+      className="overflow-hidden"
+      containerClassName="flex flex-col items-center"
+    >
+      <SectionHeading
+        eyebrow="// habilidades"
+        title="Habilidades"
+        subtitle="Principais competências e tecnologias"
+        className="mb-9"
+      />
 
-      {/* ── header ── */}
-      <div style={{ textAlign: "center", marginBottom: 34 }}>
-        <p style={{
-          color: "rgba(210,210,214,0.62)", fontFamily: "inherit",
-          fontSize: 11, letterSpacing: "0.32em", marginBottom: 10,
-          textTransform: "uppercase",
-        }}>
-          // habilidades
-        </p>
-        <h2 style={{
-          color: "#ececf0", fontSize: 30, fontWeight: 600, margin: 0,
-          letterSpacing: "-0.02em",
-          textShadow: "0 0 24px rgba(0,0,0,0.5)",
-        }}>
-          Habilidades
-        </h2>
-        <motion.p
-          key={isOpen ? "open" : "closed"}
-          initial={{ opacity: 0, y: 4 }}
-          animate={{ opacity: 1, y: 0 }}
-          style={{ color: "rgba(215,215,220,0.44)", fontSize: 13, marginTop: 10 }}
-        >
-          Principais competências e tecnologias
-        </motion.p>
-      </div>
-
-      {/* ── perspective wrapper ── */}
-      <div style={{
-        perspective: "1000px",
-        perspectiveOrigin: "50% 50%",
+      {/* ── layout wrapper ── */}
+      <div className="font-mono" style={{
         width: "100%",
         maxWidth: 980,
         display: "flex",
@@ -93,6 +94,37 @@ export default function StackBadges() {
         justifyContent: "center",
         flexWrap: "wrap",
       }}>
+
+        {/*
+          ── height shell: reserva o espaço que a tampa aberta ocupa ──
+
+          A `perspective` mora AQUI, e não no wrapper acima, para que o cenário
+          continue sendo filho direto do elemento que a define. Se a casca
+          usasse `transformStyle: preserve-3d` para deixar a perspectiva
+          "atravessar", ela entraria na ordenação 3D junto com o cenário — e
+          como é uma caixa transparente em z = 0, capturaria o ponteiro de tudo
+          que o `rotateY(-18°)` empurra para trás desse plano (a metade
+          esquerda do estojo, até z ≈ -65px). Os badges da esquerda ficavam
+          mortos no hover; os da direita, que vêm para z positivo, funcionavam.
+
+          `perspectiveOrigin` em pixels, não em 50%: a casca cresce ao abrir, e
+          uma origem percentual faria o ponto de fuga descer junto, deformando
+          o estojo durante a animação. H/2 é onde a origem já ficava fechada.
+        */}
+        <motion.div
+          animate={{ height: isOpen ? H + LID_OPEN_HEADROOM : H }}
+          transition={{
+            type: "tween",
+            duration: isOpen ? 1.2 : 0.9,
+            ease: isOpen ? LID_EASE_OPEN : LID_EASE_CLOSE,
+          }}
+          style={{
+            position: "relative",
+            width: W,
+            perspective: "1000px",
+            perspectiveOrigin: `50% ${H / 2}px`,
+          }}
+        >
 
         {/* ── scene: tilts laterally when open ── */}
         <motion.div
@@ -396,12 +428,12 @@ export default function StackBadges() {
               rotateX: {
                 type: "tween",
                 duration: isOpen ? 1.2 : 0.9,
-                ease: isOpen ? [0.19, 1, 0.22, 1] : [0.32, 0.72, 0, 1],
+                ease: isOpen ? LID_EASE_OPEN : LID_EASE_CLOSE,
               },
               y: {
                 type: "tween",
                 duration: isOpen ? 1.2 : 0.9,
-                ease: isOpen ? [0.19, 1, 0.22, 1] : [0.32, 0.72, 0, 1],
+                ease: isOpen ? LID_EASE_OPEN : LID_EASE_CLOSE,
               },
             }}
             style={{
@@ -674,6 +706,8 @@ export default function StackBadges() {
 
         </motion.div>{/* end scene */}
 
+        </motion.div>{/* end height shell */}
+
         <AnimatePresence>
           {isOpen && selectedBadge && (
             <motion.aside
@@ -776,6 +810,6 @@ export default function StackBadges() {
           )}
         </AnimatePresence>
       </div>
-    </motion.section>
+    </Section>
   );
 } 
