@@ -85,10 +85,25 @@ export default {
             height: "0",
           },
         },
+        "cue-shimmer": {
+          "0%": { transform: "translateX(-140%)" },
+          "60%, 100%": { transform: "translateX(240%)" },
+        },
+        "cue-halo": {
+          "0%, 100%": { opacity: "0.3", transform: "scale(0.94)" },
+          "50%": { opacity: "0.7", transform: "scale(1.1)" },
+        },
+        "cue-ring": {
+          "0%": { opacity: "0.5", transform: "scale(0.9)" },
+          "100%": { opacity: "0", transform: "scale(1.45)" },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
+        "cue-shimmer": "cue-shimmer 3.4s ease-in-out infinite",
+        "cue-halo": "cue-halo 3s ease-in-out infinite",
+        "cue-ring": "cue-ring 2.6s ease-out infinite",
       },
     },
   },

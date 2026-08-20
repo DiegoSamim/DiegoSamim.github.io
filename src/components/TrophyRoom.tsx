@@ -3,6 +3,9 @@ import { motion, AnimatePresence } from "framer-motion";
 import { ChevronLeft, ChevronRight, ExternalLink, Github, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { projectsContent } from "@/lib/content";
+import type { ProjectPresentation } from "@/lib/content";
+import PresentationCue from "@/components/PresentationCue";
+import PresentationTheater from "@/components/PresentationTheater";
 import { playSound } from "@/lib/sfx";
 
 type Project = (typeof projectsContent)[number];
@@ -62,6 +65,7 @@ const Podium = ({
   onHoverStart,
   onHoverEnd,
   onClick,
+  onOpenPresentation,
 }: {
   project: Project;
   position: "center" | "side";
@@ -69,11 +73,13 @@ const Podium = ({
   onHoverStart: () => void;
   onHoverEnd: () => void;
   onClick: () => void;
+  onOpenPresentation: () => void;
 }) => {
   const isCenter = position === "center";
   const isLit = isCenter && hovering;
   const [logoHasError, setLogoHasError] = useState(false);
   const logoSrc = resolveProjectAsset(project.logo ?? project.image);
+  const hasPresentation = Boolean(project.presentation);
 
   useEffect(() => {
     setLogoHasError(false);
@@ -121,6 +127,22 @@ const Podium = ({
               background: "hsl(var(--foreground) / 0.8)",
               boxShadow: "0 0 10px hsl(var(--foreground) / 0.35), 0 0 24px hsl(var(--foreground) / 0.15)",
             }}
+          />
+        </motion.div>
+      )}
+
+      {/* Selo de apresentação */}
+      {isCenter && hasPresentation && (
+        <motion.div
+          className="absolute -top-2 right-0 z-20"
+          initial={{ opacity: 0, scale: 0.7 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ type: "spring", stiffness: 260, damping: 20, delay: 0.1 }}
+        >
+          <PresentationCue
+            variant="podium"
+            subtitle={project.presentation?.subtitle}
+            onOpen={onOpenPresentation}
           />
         </motion.div>
       )}
@@ -264,6 +286,13 @@ const TrophyRoom = () => {
   const [hovering, setHovering] = useState(false);
   const [selectedImageHasError, setSelectedImageHasError] = useState(false);
   const [selectedMediaIndex, setSelectedMediaIndex] = useState(0);
+  const [presentation, setPresentation] = useState<ProjectPresentation | null>(null);
+
+  const openPresentation = useCallback((projectPresentation?: ProjectPresentation) => {
+    if (!projectPresentation) return;
+    playSound("openCase", { volume: 0.34, debounceMs: 160 });
+    setPresentation(projectPresentation);
+  }, []);
 
   const selectedMedia = selected
     ? (selected.media && selected.media.length > 0
@@ -347,6 +376,7 @@ const TrophyRoom = () => {
                 }
               }}
               onHoverEnd={() => position === "center" && setHovering(false)}
+              onOpenPresentation={() => openPresentation(project.presentation)}
               onClick={() => {
                 if (position === "center") {
                   playSound("openModal", { volume: 0.34, debounceMs: 120 });
@@ -474,6 +504,13 @@ const TrophyRoom = () => {
                       ))}
                     </div>
                   </div>
+                  {selected.presentation && (
+                    <PresentationCue
+                      variant="panel"
+                      subtitle={selected.presentation.subtitle}
+                      onOpen={() => openPresentation(selected.presentation)}
+                    />
+                  )}
                   <div className="flex gap-3 pt-2">
                     <Button variant="hero" size="sm" asChild>
                       <a
@@ -502,6 +539,8 @@ const TrophyRoom = () => {
           </motion.div>
         )}
       </AnimatePresence>
+
+      <PresentationTheater presentation={presentation} onClose={() => setPresentation(null)} />
     </section>
   );
 };

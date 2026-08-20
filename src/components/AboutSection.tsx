@@ -2,7 +2,6 @@ import { useMemo, useState } from "react";
 import { motion } from "framer-motion";
 import {
   Award,
-  BookOpen,
   Briefcase,
   Calendar,
   ChevronLeft,
@@ -32,7 +31,6 @@ const AboutSection = () => {
 
   const iconMap: Record<AboutCardIcon, LucideIcon> = {
     [AboutCardIcon.CERTIFICATE]: Award,
-    [AboutCardIcon.COURSE]: BookOpen,
     [AboutCardIcon.COLLEGE]: GraduationCap,
     [AboutCardIcon.EXPERIENCE]: Briefcase,
   };
@@ -76,7 +74,7 @@ const AboutSection = () => {
           <p className="text-muted-foreground text-lg leading-relaxed max-w-3xl mx-auto">{aboutContent.description}</p>
         </motion.div>
 
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {aboutContent.cards.map((item, i) => {
             const Icon = iconMap[item.icon] ?? Award;
 
@@ -145,7 +143,7 @@ const AboutSection = () => {
                 </div>
 
                 <div className="rounded-2xl border border-border/70 bg-background/40 p-5 space-y-4">
-                  <div className="space-y-2">
+                  <div className="space-y-1">
                     <h4 className="text-lg font-semibold">{certificationItem.name}</h4>
                     <p className="text-sm text-muted-foreground">{certificationItem.issuer}</p>
                   </div>
@@ -157,33 +155,17 @@ const AboutSection = () => {
 
                   <p className="text-sm leading-relaxed text-muted-foreground">{certificationItem.details}</p>
 
-                  {certificationItem.credentialImageUrl && (
+                  {certificationItem.logo && (
                     <div className="rounded-xl border border-border/70 bg-secondary/20 p-4 flex items-center justify-center min-h-40">
                       <img
-                        src={certificationItem.credentialImageUrl}
-                        alt={certificationItem.credentialImageAlt ?? `Credencial ${certificationItem.name}`}
+                        src={certificationItem.logo}
+                        alt={`Logo ${certificationItem.issuer}`}
                         loading="lazy"
-                        className="max-h-52 w-auto max-w-full object-contain"
+                        className="max-h-40 w-auto max-w-full object-contain"
                       />
                     </div>
                   )}
                 </div>
-              </div>
-            )}
-
-            {activeCard?.type === AboutCardType.COURSES && (
-              <div className="space-y-4 pt-2">
-                {aboutContent.courses.map((course) => (
-                  <article
-                    key={`${course.name}-${course.date}`}
-                    className="rounded-xl border border-border/70 bg-background/40 p-4"
-                  >
-                    <h4 className="font-semibold">{course.name}</h4>
-                    <p className="text-sm text-muted-foreground mt-1">{course.provider}</p>
-                    <p className="text-xs text-muted-foreground font-mono mt-2">{course.date}</p>
-                    <p className="text-sm text-muted-foreground mt-3 leading-relaxed">{course.details}</p>
-                  </article>
-                ))}
               </div>
             )}
 
@@ -197,8 +179,19 @@ const AboutSection = () => {
                     )}
 
                     <article className="rounded-xl border border-border/70 bg-background/40 p-4">
-                      <h4 className="font-semibold">{item.title}</h4>
-                      <p className="text-sm text-muted-foreground mt-1">{item.institution}</p>
+                      <div className="flex items-start gap-3">
+                        {item.logo && (
+                          <img
+                            src={item.logo}
+                            alt={`Logo ${item.institution}`}
+                            className="h-14 w-14 shrink-0 rounded-lg border border-border/70 bg-background/60 object-contain p-1.5"
+                          />
+                        )}
+                        <div>
+                          <h4 className="font-semibold">{item.title}</h4>
+                          <p className="text-sm text-muted-foreground mt-1">{item.institution}</p>
+                        </div>
+                      </div>
                       <div className="mt-2 flex flex-wrap items-center gap-2 text-xs text-muted-foreground font-mono">
                         <span className="rounded-full border border-border/70 bg-secondary/80 px-2.5 py-1">{item.period}</span>
                         <span>{item.date}</span>
@@ -217,8 +210,19 @@ const AboutSection = () => {
                     key={`${experience.title}-${experience.date}`}
                     className="rounded-xl border border-border/70 bg-background/40 p-4"
                   >
-                    <h4 className="font-semibold">{experience.title}</h4>
-                    <p className="text-sm text-muted-foreground mt-1">{experience.context}</p>
+                    <div className="flex items-start gap-3">
+                      {experience.logo && (
+                        <img
+                          src={experience.logo}
+                          alt={`Logo ${experience.context}`}
+                          className="h-14 w-14 shrink-0 rounded-lg border border-border/70 bg-background/60 object-contain p-1.5"
+                        />
+                      )}
+                      <div>
+                        <h4 className="font-semibold">{experience.title}</h4>
+                        <p className="text-sm text-muted-foreground mt-1">{experience.context}</p>
+                      </div>
+                    </div>
                     <p className="text-xs text-muted-foreground font-mono mt-2">{experience.date}</p>
                     <p className="text-sm text-muted-foreground mt-3 leading-relaxed">{experience.details}</p>
                   </article>

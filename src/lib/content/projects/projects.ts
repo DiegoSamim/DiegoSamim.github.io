@@ -24,6 +24,7 @@ import LogiaDashboard from "@/assets/logia/LogiaDashboard.png";
 import LogiaConsulta from "@/assets/logia/LogiaConsulta.png";
 import LogiaTarefas from "@/assets/logia/LogiaTarefas.gif";
 import LogiaDatabase from "@/assets/logia/LogiaDatabase.gif";
+import LogiaMotionDesign from "@/assets/logia/video/MotionDesignLogia.mp4";
 
 export type ProjectDeviceType = "pc" | "mobile";
 
@@ -32,6 +33,13 @@ export interface ProjectMedia {
   device: ProjectDeviceType;
   alt?: string;
   caption?: string;
+}
+
+export interface ProjectPresentation {
+  src: string;
+  title: string;
+  subtitle?: string;
+  poster?: string;
 }
 
 export interface ProjectContent {
@@ -48,6 +56,7 @@ export interface ProjectContent {
   logo?: string;
   media?: ProjectMedia[];
   image?: string;
+  presentation?: ProjectPresentation;
 }
 
 export const projectsContent: ProjectContent[] = [
@@ -147,6 +156,11 @@ export const projectsContent: ProjectContent[] = [
       "Preservar o contexto técnico do time de forma estruturada e pesquisável, reduzindo a dependência de memória individual e facilitando o acompanhamento, a documentação e o uso de agentes de IA no desenvolvimento.",
     github: "https://github.com/DiegoSamim/LogIA",
     logo: LogiaLogo,
+    presentation: {
+      src: LogiaMotionDesign,
+      title: "LogIA",
+      poster: LogiaLogo,
+    },
     media: [
       {
         src: LogiaHome,
