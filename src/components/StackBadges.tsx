@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Section from "@/components/Section";
 import SectionHeading from "@/components/SectionHeading";
@@ -42,6 +42,32 @@ export default function StackBadges() {
   const [hovered, setHovered] = useState<string | null>(null);
   const [selectedBadge, setSelectedBadge] = useState<(typeof allBadges)[number] | null>(null);
   const [page, setPage] = useState(0);
+
+  /* O estojo é desenhado inteiro em px fixos (W = 420). Em telas estreitas
+     isso ultrapassava a viewport. Em vez de reescrever a cena inteira em
+     unidades relativas, medimos o espaço disponível e encolhemos o estojo
+     todo com um `transform: scale`, mantendo a geometria interna intacta.
+
+     Aberto, o `rotateY`/`x` do cenário projeta a caixa ~40-55px além do seu
+     próprio contorno plano (mais quando um badge está selecionado, que puxa
+     x para -80). TILT_BUFFER reserva essa folga nos dois lados antes de
+     calcular a escala, senão o `overflow-hidden` da seção corta a ponta. */
+  const TILT_BUFFER = 64;
+  const caseWrapperRef = useRef<HTMLDivElement>(null);
+  const [scale, setScale] = useState(1);
+
+  useEffect(() => {
+    const el = caseWrapperRef.current;
+    if (!el) return;
+    const updateScale = () => {
+      const available = el.offsetWidth;
+      if (available > 0) setScale(Math.min(1, available / (W + TILT_BUFFER * 2)));
+    };
+    updateScale();
+    const observer = new ResizeObserver(updateScale);
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
 
   const totalPages = Math.max(1, Math.ceil(allBadges.length / SKILLS_PER_PAGE));
   const startIndex = page * SKILLS_PER_PAGE;
@@ -112,6 +138,24 @@ export default function StackBadges() {
           o estojo durante a animação. H/2 é onde a origem já ficava fechada.
         */}
         <motion.div
+          ref={caseWrapperRef}
+          animate={{ height: (isOpen ? H + LID_OPEN_HEADROOM : H) * scale }}
+          transition={{
+            type: "tween",
+            duration: isOpen ? 1.2 : 0.9,
+            ease: isOpen ? LID_EASE_OPEN : LID_EASE_CLOSE,
+          }}
+          style={{
+            position: "relative",
+            width: "100%",
+            maxWidth: W + TILT_BUFFER * 2,
+            margin: "0 auto",
+            display: "flex",
+            justifyContent: "center",
+            overflow: "visible",
+          }}
+        >
+        <motion.div
           animate={{ height: isOpen ? H + LID_OPEN_HEADROOM : H }}
           transition={{
             type: "tween",
@@ -121,6 +165,9 @@ export default function StackBadges() {
           style={{
             position: "relative",
             width: W,
+            flexShrink: 0,
+            transform: `scale(${scale})`,
+            transformOrigin: "top center",
             perspective: "1000px",
             perspectiveOrigin: `50% ${H / 2}px`,
           }}
@@ -706,6 +753,8 @@ export default function StackBadges() {
 
         </motion.div>{/* end scene */}
 
+        </motion.div>{/* end scaled case */}
+
         </motion.div>{/* end height shell */}
 
         <AnimatePresence>
@@ -716,7 +765,7 @@ export default function StackBadges() {
               exit={{ opacity: 0, x: 46, y: 8 }}
               transition={{ duration: 0.36, ease: "easeOut" }}
               style={{
-                width: 320,
+                width: "min(320px, 100%)",
                 background: "linear-gradient(175deg, rgba(18,18,18,0.95) 0%, rgba(10,10,10,0.96) 100%)",
                 border: "1.5px solid rgba(255,255,255,0.1)",
                 borderRadius: 12,

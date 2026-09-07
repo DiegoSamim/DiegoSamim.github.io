@@ -37,7 +37,7 @@ const DeviceFrame = ({
 }) => {
   if (device === "mobile") {
     return (
-      <div className="mx-auto w-[250px] h-[460px] rounded-[2.2rem] p-3 bg-secondary border border-strong shadow-[0_20px_40px_hsl(225_20%_3%/0.6)] relative">
+      <div className="mx-auto w-[min(250px,72vw)] aspect-[250/460] rounded-[2.2rem] p-3 bg-secondary border border-strong shadow-[0_20px_40px_hsl(225_20%_3%/0.6)] relative">
         <div className="absolute top-2 left-1/2 -translate-x-1/2 w-24 h-4 rounded-b-xl bg-background" />
         <div className="w-full h-full rounded-[1.6rem] overflow-hidden bg-background">
           <img src={src} alt={alt} className="w-full h-full object-cover" onError={onError} />
@@ -93,7 +93,7 @@ const Podium = ({
       className="relative flex flex-col items-center"
       style={{
         perspective: "600px",
-        width: isCenter ? "220px" : "160px",
+        width: isCenter ? "clamp(120px, 34vw, 220px)" : "clamp(80px, 24vw, 160px)",
         cursor: isCenter ? "pointer" : "default",
       }}
       animate={{
@@ -416,19 +416,19 @@ const TrophyRoom = () => {
               exit={{ scale: 0.85, opacity: 0, y: 40 }}
               transition={{ type: "spring", damping: 25, stiffness: 300 }}
               onClick={(e) => e.stopPropagation()}
-              className={`glass rounded-2xl w-full p-8 relative ${hasGallery ? "max-w-6xl" : "max-w-lg"}`}
+              className={`glass rounded-2xl w-full relative flex flex-col max-h-[90vh] ${hasGallery ? "max-w-6xl" : "max-w-lg"}`}
             >
               <Button
                 variant="ghost"
                 size="icon"
                 onClick={() => setSelected(null)}
                 onMouseEnter={() => playSound("buttonHover", { volume: 0.2, debounceMs: 90 })}
-                className="absolute top-4 right-4 text-muted-foreground hover:text-foreground"
+                className="absolute top-4 right-4 z-10 text-muted-foreground hover:text-foreground"
               >
                 <X className="h-5 w-5" />
               </Button>
 
-              <div className={`${hasGallery ? "md:grid md:grid-cols-[1.3fr_1fr] md:gap-8" : ""}`}>
+              <div className={`overflow-y-auto p-5 sm:p-8 ${hasGallery ? "md:grid md:grid-cols-[1.3fr_1fr] md:gap-8" : ""}`}>
                 <div className="text-center mb-6 md:mb-0">
                   {currentMediaSrc && !selectedImageHasError ? (
                     <div className="relative">

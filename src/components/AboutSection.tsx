@@ -103,7 +103,8 @@ const AboutSection = () => {
         </div>
 
       <Dialog open={isModalOpen} onOpenChange={handleOpenChange}>
-          <DialogContent className="max-w-3xl max-h-[85vh] overflow-y-auto border-border bg-card p-7 sm:p-8">
+          <DialogContent className="max-w-3xl max-h-[85vh] overflow-hidden border-border bg-card p-0 flex flex-col">
+            <div className="overflow-y-auto p-5 sm:p-8">
             <DialogHeader className="space-y-3 border-b border-border pb-5">
               <DialogTitle className="text-2xl">{activeCard?.title}</DialogTitle>
               <DialogDescription className="text-sm leading-relaxed max-w-2xl">
@@ -224,6 +225,7 @@ const AboutSection = () => {
                 ))}
               </div>
             )}
+            </div>
           </DialogContent>
       </Dialog>
     </Section>
