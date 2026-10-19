@@ -1,3 +1,5 @@
+import HackathonCertificate from "@/assets/certificates/hackathon-ia-2026.pdf";
+import HackathonPreview from "@/assets/certificates/hackathon-ia-2026.png";
 import AWSCloudPractionerLogo from "@/assets/logos/AWSCloudPractioner.png";
 import DeloitteLogo from "@/assets/logos/DeloitteLogo.png";
 import FluxoLogo from "@/assets/logos/FluxoLogo.png";
@@ -25,6 +27,8 @@ export interface AboutCardContent {
 }
 
 export interface CertificationItem {
+  documentUrl?: string;
+  preview?: string;
   name: string;
   issuer: string;
   date: string;
@@ -68,7 +72,7 @@ export const aboutContent: AboutContent = {
     {
       id: 1,
       title: "Certificações",
-      description: "Certificados técnicos e trilhas concluídas em plataformas de tecnologia.",
+      description: "Certificados técnicos, trilhas concluídas e participação em hackathons.",
       icon: AboutCardIcon.CERTIFICATE,
       type: AboutCardType.CERTIFICATIONS,
     },
@@ -88,6 +92,14 @@ export const aboutContent: AboutContent = {
     },
   ],
   certifications: [
+    {
+      name: "Hackathon IA 2026 — Transição Energética e Descarbonização",
+      issuer: "Incubadora de Empresas COPPE/UFRJ e Made in Rio",
+      date: "27/09/2026",
+      details: "Certificado de participação nas etapas de Treinamento e Ideathon, com 18 horas cada, totalizando 36 horas de atividades em formato presencial e online.",
+      documentUrl: HackathonCertificate,
+      preview: HackathonPreview,
+    },
     {
       name: "AWS Cloud Practitioner",
       issuer: "Amazon Web Services",

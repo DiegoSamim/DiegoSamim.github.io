@@ -17,6 +17,7 @@ import SaciImageMap from "@/assets/saci/SaciImageMap.png";
 import SaciImageNordeste from "@/assets/saci/SaciImageNordeste.png";
 import SaciImageBestiario from "@/assets/saci/SaciImageBestiario.png";
 import SaciImageGameOver from "@/assets/saci/SaciImageGameOver.png";
+import SaciTeaser from "@/assets/saci/video/saci-teaser.mp4";
 import SaciLogo from "@/assets/saci/SaciLogo.png";
 import LogiaLogo from "@/assets/logia/LogiaLogo.png";
 import LogiaHome from "@/assets/logia/LogiaHome.png";
@@ -127,6 +128,12 @@ export const projectsContent: ProjectContent[] = [
       "Criar um jogo narrativo educativo que explore o folclore brasileiro utilizando IA generativa para tornar as interações com NPCs dinâmicas e imprevisíveis, incentivando a exploração, a descoberta cultural e a tomada de decisões durante a jornada do jogador.",
     github: "https://github.com",
     logo: SaciLogo,
+    presentation: {
+      src: SaciTeaser,
+      title: "SACI",
+      subtitle: "Uma odisseia pelas lendas",
+      poster: SaciLogo,
+    },
     media: [
       { src: SaciImageHome, device: "mobile", alt: "SACI - Tela inicial" },
       { src: SaciImageMap, device: "mobile", alt: "SACI - Mapa" },

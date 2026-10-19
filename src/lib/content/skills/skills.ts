@@ -1,3 +1,22 @@
+import skillIcon0 from "@/assets/skills/javascript-original.svg";
+import skillIcon1 from "@/assets/skills/react-original.svg";
+import skillIcon2 from "@/assets/skills/cellphone.svg";
+import skillIcon3 from "@/assets/skills/nextjs-original.svg";
+import skillIcon4 from "@/assets/skills/angularjs-original.svg";
+import skillIcon5 from "@/assets/skills/nodejs-original.svg";
+import skillIcon6 from "@/assets/skills/python-original.svg";
+import skillIcon7 from "@/assets/skills/java-original.svg";
+import skillIcon8 from "@/assets/skills/cplusplus-original.svg";
+import skillIcon9 from "@/assets/skills/postgresql-original.svg";
+import skillIcon10 from "@/assets/skills/sequelize-original.svg";
+import skillIcon11 from "@/assets/skills/docker-original.svg";
+import skillIcon12 from "@/assets/skills/git-original.svg";
+import skillIcon13 from "@/assets/skills/amazonwebservices-original-wordmark.svg";
+import skillIcon14 from "@/assets/skills/redis-original.svg";
+import skillIcon15 from "@/assets/skills/vitejs-original.svg";
+import skillIcon16 from "@/assets/skills/shield-lock-outline.svg";
+import skillIcon17 from "@/assets/skills/robot-outline.svg";
+
 export interface SkillContent {
   name: string;
   emoji: string;
@@ -16,7 +35,7 @@ export const skillsContent: SkillContent[] = [
       "Tipagem forte com TypeScript",
       "Integração com APIs",
     ],
-    iconUrl: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg",
+    iconUrl: skillIcon0,
   },
   {
     name: "React",
@@ -27,7 +46,7 @@ export const skillsContent: SkillContent[] = [
       "Hooks e gerenciamento de estado",
       "Performance e reusabilidade",
     ],
-    iconUrl: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg",
+    iconUrl: skillIcon1,
   },
   {
     name: "React Native",
@@ -38,7 +57,7 @@ export const skillsContent: SkillContent[] = [
       "Integração com APIs",
       "UI mobile responsiva",
     ],
-    iconUrl: "https://api.iconify.design/mdi:cellphone.svg?color=%2300E5FF",
+    iconUrl: skillIcon2,
   },
   {
     name: "Next.js",
@@ -49,7 +68,7 @@ export const skillsContent: SkillContent[] = [
       "Rotas e API routes",
       "SEO e performance",
     ],
-    iconUrl: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg",
+    iconUrl: skillIcon3,
   },
   {
     name: "Angular",
@@ -60,7 +79,7 @@ export const skillsContent: SkillContent[] = [
       "Injeção de dependência",
       "Aplicações escaláveis",
     ],
-    iconUrl: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/angularjs/angularjs-original.svg",
+    iconUrl: skillIcon4,
   },
   {
     name: "Node.js & NestJS",
@@ -71,7 +90,7 @@ export const skillsContent: SkillContent[] = [
       "Arquitetura modular com NestJS",
       "Autenticação e middlewares",
     ],
-    iconUrl: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg",
+    iconUrl: skillIcon5,
   },
   {
     name: "Python & FastAPI",
@@ -82,7 +101,7 @@ export const skillsContent: SkillContent[] = [
       "Scripts e automações",
       "Processamento de dados",
     ],
-    iconUrl: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg",
+    iconUrl: skillIcon6,
   },
   {
     name: "Java",
@@ -93,7 +112,7 @@ export const skillsContent: SkillContent[] = [
       "APIs e sistemas corporativos",
       "Estruturas e performance",
     ],
-    iconUrl: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg",
+    iconUrl: skillIcon7,
   },
   {
     name: "C++",
@@ -104,7 +123,7 @@ export const skillsContent: SkillContent[] = [
       "Gerenciamento de memória",
       "Performance e baixo nível",
     ],
-    iconUrl: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cplusplus/cplusplus-original.svg",
+    iconUrl: skillIcon8,
   },
   {
     name: "SQL & Bancos de Dados",
@@ -115,7 +134,7 @@ export const skillsContent: SkillContent[] = [
       "Queries otimizadas",
       "Modelagem relacional",
     ],
-    iconUrl: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg",
+    iconUrl: skillIcon9,
   },
   {
     name: "Prisma & Sequelize",
@@ -126,7 +145,7 @@ export const skillsContent: SkillContent[] = [
       "Migrations",
       "Integração com Node.js",
     ],
-    iconUrl: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/sequelize/sequelize-original.svg",
+    iconUrl: skillIcon10,
   },
   {
     name: "Docker",
@@ -137,7 +156,7 @@ export const skillsContent: SkillContent[] = [
       "Build e deploy",
       "Docker Compose",
     ],
-    iconUrl: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg",
+    iconUrl: skillIcon11,
   },
   {
     name: "Git",
@@ -148,7 +167,7 @@ export const skillsContent: SkillContent[] = [
       "Code review",
       "Fluxo de trabalho em equipe",
     ],
-    iconUrl: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg",
+    iconUrl: skillIcon12,
   },
   {
     name: "AWS",
@@ -159,7 +178,7 @@ export const skillsContent: SkillContent[] = [
       "Serviços cloud",
       "Escalabilidade",
     ],
-    iconUrl: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/amazonwebservices/amazonwebservices-original-wordmark.svg",
+    iconUrl: skillIcon13,
   },
   {
     name: "Redis",
@@ -170,7 +189,7 @@ export const skillsContent: SkillContent[] = [
       "Sessões",
       "Pub/Sub",
     ],
-    iconUrl: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/redis/redis-original.svg",
+    iconUrl: skillIcon14,
   },
   {
     name: "Vite",
@@ -181,7 +200,7 @@ export const skillsContent: SkillContent[] = [
       "Build otimizado",
       "Projetos modernos",
     ],
-    iconUrl: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vitejs/vitejs-original.svg",
+    iconUrl: skillIcon15,
   },
   {
     name: "Segurança & Criptografia",
@@ -192,7 +211,7 @@ export const skillsContent: SkillContent[] = [
       "Hash e criptografia",
       "Boas práticas de segurança",
     ],
-    iconUrl: "https://api.iconify.design/mdi:shield-lock-outline.svg?color=%23F59E0B",
+    iconUrl: skillIcon16,
   },
   {
     name: "LangChain & IA",
@@ -203,6 +222,6 @@ export const skillsContent: SkillContent[] = [
       "Automação com IA",
       "Aplicações inteligentes",
     ],
-    iconUrl: "https://api.iconify.design/mdi:robot-outline.svg?color=%23A3E635",
+    iconUrl: skillIcon17,
   },
 ];

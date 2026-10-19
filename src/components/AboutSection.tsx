@@ -7,6 +7,7 @@ import {
   Calendar,
   ChevronLeft,
   ChevronRight,
+  ExternalLink,
   GraduationCap,
   type LucideIcon,
 } from "lucide-react";
@@ -150,6 +151,27 @@ const AboutSection = () => {
                   </div>
 
                   <p className="text-sm leading-relaxed text-muted-foreground">{certificationItem.details}</p>
+
+                  {certificationItem.preview && (
+                    <img
+                      src={certificationItem.preview}
+                      alt={`Certificado de participação — ${certificationItem.name}`}
+                      loading="lazy"
+                      className="w-full rounded-xl border border-border"
+                    />
+                  )}
+
+                  {certificationItem.documentUrl && (
+                    <a
+                      href={certificationItem.documentUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 rounded-lg border border-border bg-secondary px-4 py-2 text-sm font-medium transition-colors hover:bg-accent"
+                    >
+                      <ExternalLink className="h-4 w-4" />
+                      Abrir certificado em PDF
+                    </a>
+                  )}
 
                   {certificationItem.logo && (
                     <div className="rounded-xl border border-border bg-secondary/20 p-4 flex items-center justify-center min-h-40">
